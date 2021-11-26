@@ -34,6 +34,10 @@
                         </x-jet-dropdown-link>
                     </x-slot>
                 </x-nav-dropdown-link>
+
+                <x-jet-nav-link href="{{ route('global-settings') }}" :active="request()->routeIs('global-settings')">
+                    {{ __('Global Settings') }}
+                </x-jet-nav-link>
             </ul>
 
             <!-- Right Side Of Navbar -->

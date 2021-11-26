@@ -30,6 +30,12 @@ class PermissionsTableSeeder extends Seeder
                 'description' => 'Can view roles',
                 'model'       => 'Permission',
             ],
+            [
+                'name'        => 'Can View Global Settings',
+                'slug'        => 'view.global.settings',
+                'description' => 'Can view global settings',
+                'model'       => 'Permission',
+            ],
         ];
 
         /*
@@ -37,13 +43,14 @@ class PermissionsTableSeeder extends Seeder
          *
          */
         foreach ($Permissionitems as $Permissionitem) {
-            $newPermissionitem = config('roles.models.permission')::where('slug', '=', $Permissionitem['slug'])->first();
+            $newPermissionitem = config('roles.models.permission')::where('slug', '=',
+                $Permissionitem['slug'])->first();
             if ($newPermissionitem === null) {
                 $newPermissionitem = config('roles.models.permission')::create([
-                    'name'          => $Permissionitem['name'],
-                    'slug'          => $Permissionitem['slug'],
-                    'description'   => $Permissionitem['description'],
-                    'model'         => $Permissionitem['model'],
+                    'name'        => $Permissionitem['name'],
+                    'slug'        => $Permissionitem['slug'],
+                    'description' => $Permissionitem['description'],
+                    'model'       => $Permissionitem['model'],
                 ]);
             }
         }

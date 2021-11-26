@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="h4 font-weight-bold">
-            {{ __('Manage Users') }} / {{ __('Users') }}
+            {{ __('Manage Users') }} / {{ __('Users') }} (For Admins)
         </h2>
     </x-slot>
     <div class="row justify-content-center my-5">

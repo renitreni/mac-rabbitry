@@ -3,6 +3,7 @@
 use App\Http\Livewire\Auth\RabbitCreate;
 use App\Http\Livewire\Auth\RabbitEdit;
 use App\Http\Livewire\Auth\Rabbits;
+use App\Http\Livewire\GlobalSettings;
 use App\Http\Livewire\PermissionEdit;
 use App\Http\Livewire\RoleCreate;
 use App\Http\Livewire\RoleEdit;
@@ -30,6 +31,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
     Route::prefix('dashboard')->group(function () {
         Route::get('/', fn() => view('dashboard'))->name('dashboard');
     });
@@ -54,6 +56,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::prefix('permissions')->group(function () {
         Route::get('/edit/{role}', PermissionEdit::class)->name('permission.edit');
+    });
+
+    Route::prefix('global-settings')->group(function () {
+        Route::get('/', GlobalSettings::class)->name('global-settings');
     });
 
     Route::get('storage/{path}',

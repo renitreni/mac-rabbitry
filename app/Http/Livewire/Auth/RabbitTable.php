@@ -92,13 +92,13 @@ class RabbitTable extends PowerGridComponent
             ->addColumn('breeding_id')
             ->addColumn('cage_no')
             ->addColumn('c.name', function (Rabbit $model) {
-                return $model->category->name ?? '';
+                return $model->category()->withTrashed()->first()->name ?? '';
             })
             ->addColumn('b.name', function (Rabbit $model) {
-                return $model->breed->name ?? '';
+                return $model->breed()->withTrashed()->first()->name ?? '';
             })
             ->addColumn('rs.name', function (Rabbit $model) {
-                return $model->status->name ?? '';
+                return $model->status()->withTrashed()->first()->name ?? '';
             })
             ->addColumn('dob', function (Rabbit $model) {
                 return "<div class='text-nowrap'>".Carbon::parse($model->dob)->format('Y-m-d')."</div>";
@@ -273,12 +273,13 @@ class RabbitTable extends PowerGridComponent
         return null;
     }
 
-    public function header(): array
+    public function header()
+    : array
     {
         return [
             Button::add('Add Rabbit')
                 ->caption('New window')
-                ->class('bg-gray-300')
+                ->class('bg-gray-300'),
         ];
     }
 }
