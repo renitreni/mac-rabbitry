@@ -21,6 +21,10 @@
                     {{ __('Rabbits') }}
                 </x-jet-nav-link>
 
+                <x-jet-nav-link href="{{ route('breeding') }}" :active="request()->routeIs('breeding')">
+                    {{ __('Breeding') }}
+                </x-jet-nav-link>
+
                 <x-nav-dropdown-link id="manageUserDropdown" :active="request()->routeIs('users') || request()->routeIs('roles')">
                     <x-slot name="trigger">
                         Manage Users

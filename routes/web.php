@@ -3,6 +3,8 @@
 use App\Http\Livewire\Auth\RabbitCreate;
 use App\Http\Livewire\Auth\RabbitEdit;
 use App\Http\Livewire\Auth\Rabbits;
+use App\Http\Livewire\Auth\Breeding;
+use App\Http\Livewire\Auth\BreedingCreate;
 use App\Http\Livewire\GlobalSettings;
 use App\Http\Livewire\PermissionEdit;
 use App\Http\Livewire\RoleCreate;
@@ -10,9 +12,6 @@ use App\Http\Livewire\RoleEdit;
 use App\Http\Livewire\Roles;
 use App\Http\Livewire\UserCreate;
 use App\Http\Livewire\UserEdit;
-use App\Http\Livewire\UserForm;
-use App\Models\Rabbit;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +41,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/edit/{rabbit}', RabbitEdit::class)->name('rabbit.edit');
     });
 
+    Route::prefix('breeding')->group(function () {
+        Route::get('/', Breeding::class)->name('breeding');
+        Route::get('/breeding-create', BreedingCreate::class)->name('breeding.create');
+    });
+
     Route::prefix('manage-users')->group(function () {
         Route::get('/users', fn() => view('users'))->name('users');
         Route::get('/user/edit/{user}', UserEdit::class)->name('user.edit');
@@ -65,6 +69,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('storage/{path}',
         function ($path) {
             $real_path = decrypt($path);
+
             return Image::make(storage_path("app/$real_path"))->response();
         })->name('storage.view');
 
@@ -76,7 +81,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
                 abort(404);
             }
             $stream = new \App\Feature\VideoStream("$real_path");
-            return response()->stream(function() use ($stream) {
+
+            return response()->stream(function () use ($stream) {
                 $stream->start();
             });
         })->name('storage.video');

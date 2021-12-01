@@ -34,7 +34,7 @@ class BreedingFactory extends Factory
             'kindle_date'          => $this->faker->dateTimeBetween('-1 year', 'now'),
             'weaning_date'         => $this->faker->dateTimeBetween('-1 year', 'now'),
             'planned_rebreed_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'isRebreed'            => $this->faker->randomElement([1, 0]),
+            'is_rebreed'            => $this->faker->randomElement([1, 0]),
             'born_alive'           => 10,
             'born_dead'            => 0,
             'total_kits'           => 10,

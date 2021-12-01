@@ -63,7 +63,7 @@ class RabbitCreate extends Component
             'home_breed'  => $this->home_breed_selected,
             'org_id'      => Members::getOrgID(auth()->id()),
             'inserted_by' => auth()->user()->email,
-            'isDraft'     => 1,
+            'is_draft'     => 1,
         ]);
 
         (new Rabbit())->idGenerator();
@@ -103,7 +103,7 @@ class RabbitCreate extends Component
             'home_breed'  => $this->home_breed,
             'notes'       => $this->notes,
             'inserted_by' => auth()->id(),
-            'isDraft'     => 0,
+            'is_draft'     => 0,
         ]);
 
         foreach ($this->photos as $photo) {

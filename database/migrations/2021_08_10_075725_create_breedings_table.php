@@ -25,13 +25,14 @@ class CreateBreedingsTable extends Migration
             $table->date('kindle_date')->nullable();
             $table->date('weaning_date')->nullable();
             $table->date('planned_rebreed_date')->nullable();
-            $table->integer('isRebreed')->nullable();
+            $table->integer('is_rebreed')->nullable();
             $table->integer('born_alive')->nullable();
             $table->integer('born_dead')->nullable();
             $table->integer('total_kits')->nullable();
             $table->integer('born_doe')->nullable();
             $table->integer('born_buck')->nullable();
             $table->text('notes')->nullable();
+            $table->integer('is_draft')->nullable();
             $table->string('inserted_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->softDeletes();

@@ -27,7 +27,7 @@ class Rabbit extends Model
         'avatar',
         'inserted_by',
         'updated_by',
-        'isDraft',
+        'is_draft',
     ];
 
     public function idGenerator()
@@ -92,7 +92,11 @@ class Rabbit extends Model
 
     public static function draftCleaner()
     {
-        (new self)->query()->where('inserted_by', auth()->user()->email)->where('isDraft', 1)->forceDelete();
+        (new self)->query()
+            ->where('inserted_by', auth()->user()->email)
+            ->where('is_draft', 1)
+            ->where('org_id', Members::getOrgID(auth()->id()))
+            ->forceDelete();
     }
 
     public function insertedByUser()

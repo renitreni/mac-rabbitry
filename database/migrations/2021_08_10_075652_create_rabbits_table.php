@@ -32,7 +32,7 @@ class CreateRabbitsTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('inserted_by')->nullable();
             $table->string('updated_by')->nullable();
-            $table->integer('isDraft')->nullable();
+            $table->integer('is_draft')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

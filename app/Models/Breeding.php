@@ -22,7 +22,7 @@ class Breeding extends Model
         'kindle_date',
         'weaning_date',
         'planned_rebreed_date',
-        'isRebreed',
+        'is_rebreed',
         'born_alive',
         'born_dead',
         'total_kits',
@@ -31,6 +31,7 @@ class Breeding extends Model
         'notes',
         'inserted_by',
         'updated_by',
+        'is_draft'
     ];
 
     public function idGenerator()
@@ -71,5 +72,14 @@ class Breeding extends Model
     {
         return $this->where('org_id', $org_id)
             ->select(['id', 'litter_no'])->get();
+    }
+
+    public static function draftCleaner()
+    {
+        (new self)->query()
+            ->where('inserted_by', auth()->user()->email)
+            ->where('is_draft', 1)
+            ->where('org_id', Members::getOrgID(auth()->id()))
+            ->forceDelete();
     }
 }
