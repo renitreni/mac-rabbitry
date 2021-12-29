@@ -18,4 +18,9 @@ class Members extends Model
     {
         return (new static())->where('user_id', $userid)->first()->org_id;
     }
+
+    public static function isValidOrg($org_id)
+    : bool {
+        return (new static())->where('user_id', auth()->id())->first()->org_id == $org_id;
+    }
 }

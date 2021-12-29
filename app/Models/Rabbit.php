@@ -108,4 +108,11 @@ class Rabbit extends Model
     {
         return $this->hasOne(User::class, 'id', 'updated_by');
     }
+
+    public function images()
+    {
+        return $this->hasMany(Files::class, 'model_id', 'id')
+            ->where('model', 'Rabbit')
+            ->whereNotIn('extension', ['mp4']);
+    }
 }

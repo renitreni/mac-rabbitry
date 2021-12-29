@@ -17,13 +17,37 @@
                     {{ __('Home') }}
                 </x-jet-nav-link>
 
-                <x-jet-nav-link href="{{ route('rabbits') }}" :active="request()->routeIs('rabbits')">
-                    {{ __('Rabbits') }}
-                </x-jet-nav-link>
+                <x-nav-dropdown-link id="manageUserDropdown" :active="request()->routeIs('users') || request()->routeIs('roles')">
+                    <x-slot name="trigger">
+                        {{ __('My Inventory') }}
+                    </x-slot>
+                    <x-slot name="content">
+                        <x-jet-dropdown-link href="{{ route('rabbits') }}">
+                            {{ __('Rabbits') }}
+                        </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('breeding') }}">
+                            {{ __('Breeding') }}
+                        </x-jet-dropdown-link>
+                    </x-slot>
+                </x-nav-dropdown-link>
 
-                <x-jet-nav-link href="{{ route('breeding') }}" :active="request()->routeIs('breeding')">
-                    {{ __('Breeding') }}
-                </x-jet-nav-link>
+
+                <x-nav-dropdown-link id="manageUserDropdown" :active="request()->routeIs('users') || request()->routeIs('roles')">
+                    <x-slot name="trigger">
+                        {{ __('My Organization') }}
+                    </x-slot>
+                    <x-slot name="content">
+                        <x-jet-dropdown-link href="{{ route('organization') }}">
+                            {{ __('Profile') }}
+                        </x-jet-dropdown-link>
+                        <x-jet-dropdown-link href="{{ route('organization.store') }}">
+                            {{ __('Store') }}
+                        </x-jet-dropdown-link>
+{{--                        <x-jet-dropdown-link href="{{ route('roles') }}">--}}
+{{--                            {{ __('Members') }}--}}
+{{--                        </x-jet-dropdown-link>--}}
+                    </x-slot>
+                </x-nav-dropdown-link>
 
                 <x-nav-dropdown-link id="manageUserDropdown" :active="request()->routeIs('users') || request()->routeIs('roles')">
                     <x-slot name="trigger">

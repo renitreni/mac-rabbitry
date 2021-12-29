@@ -48,11 +48,6 @@ class RabbitEdit extends Component
 
     public function mount($rabbit)
     {
-        $this->breeding_id_list = Breeding::where('org_id', Members::getOrgID(auth()->id()))->get()->toArray();
-        $this->category_id_list = Category::all()->toArray();
-        $this->breed_id_list    = Breed::all()->toArray();
-        $this->status_id_list   = RabbitStatus::all()->toArray();
-
         $model             = Rabbit::find($rabbit);
         $this->rabbit_id   = $rabbit;
         $this->org_id      = $model->org_id;
@@ -68,6 +63,16 @@ class RabbitEdit extends Component
         $this->status_id   = $model->status_id;
         $this->home_breed  = $model->home_breed;
         $this->notes       = $model->notes;
+
+        $my_org_id = Members::getOrgID(auth()->id());
+        if($this->org_id != $my_org_id){
+            return redirect()->route('rabbits');
+        }
+
+        $this->breeding_id_list = Breeding::where('org_id', $my_org_id)->get()->toArray();
+        $this->category_id_list = Category::all()->toArray();
+        $this->breed_id_list    = Breed::all()->toArray();
+        $this->status_id_list   = RabbitStatus::all()->toArray();
 
         Files::syncPhotos('Rabbit', $rabbit, $this->photos);
         Files::syncVideos('Rabbit', $rabbit, $this->video);
@@ -94,6 +99,10 @@ class RabbitEdit extends Component
             'notes'       => $this->notes,
             'updated_by'  => auth()->id(),
         ]);
+
+        session()->flash('message', 'Rabbit successfully edited.');
+
+        return redirect()->route('rabbits');
     }
 
     public function deleteMedia($id, $path)

@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Livewire\Auth\MyOrganization;
 use App\Http\Livewire\Auth\RabbitCreate;
 use App\Http\Livewire\Auth\RabbitEdit;
 use App\Http\Livewire\Auth\Rabbits;
 use App\Http\Livewire\Auth\Breeding;
 use App\Http\Livewire\Auth\BreedingCreate;
+use App\Http\Livewire\Auth\BreedingEdit;
 use App\Http\Livewire\GlobalSettings;
+use App\Http\Livewire\MyStore;
 use App\Http\Livewire\PermissionEdit;
 use App\Http\Livewire\RoleCreate;
 use App\Http\Livewire\RoleEdit;
@@ -35,6 +38,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::get('/', fn() => view('dashboard'))->name('dashboard');
     });
 
+    Route::prefix('organization')->group(function () {
+        Route::get('/', MyOrganization::class)->name('organization');
+        Route::get('/store', MyStore::class)->name('organization.store');
+    });
+
     Route::prefix('rabbits')->group(function () {
         Route::get('/', Rabbits::class)->name('rabbits');
         Route::get('/create', RabbitCreate::class)->name('rabbit.create');
@@ -44,6 +52,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::prefix('breeding')->group(function () {
         Route::get('/', Breeding::class)->name('breeding');
         Route::get('/breeding-create', BreedingCreate::class)->name('breeding.create');
+        Route::get('/breeding-edit/{breeding}', BreedingEdit::class)->name('breeding.edit');
     });
 
     Route::prefix('manage-users')->group(function () {

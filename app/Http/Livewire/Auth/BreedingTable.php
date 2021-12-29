@@ -209,23 +209,23 @@ class BreedingTable extends PowerGridComponent
     |
     */
 
-    /*
+
     public function actions(): array
     {
        return [
            Button::add('edit')
-               ->caption(__('Edit'))
-               ->class('bg-indigo-500 text-white')
+               ->caption('<i class="fas fa-edit"></i>')
+               ->class('btn btn-sm btn-info')
                ->route('breeding.edit', ['breeding' => 'id']),
 
-           Button::add('destroy')
-               ->caption(__('Delete'))
-               ->class('bg-red-500 text-white')
-               ->route('breeding.destroy', ['breeding' => 'id'])
-               ->method('delete')
+//           Button::add('destroy')
+//               ->caption(__('Delete'))
+//               ->class('bg-red-500 text-white')
+//               ->route('breeding.destroy', ['breeding' => 'id'])
+//               ->method('delete')
         ];
     }
-    */
+
 
     /*
     |--------------------------------------------------------------------------

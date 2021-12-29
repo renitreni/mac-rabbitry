@@ -14,5 +14,6 @@ class Organization extends Model
         'address',
         'email',
         'status',
+        'logo',
     ];
 }
